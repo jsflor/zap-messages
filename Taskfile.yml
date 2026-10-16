@@ -1,0 +1,68 @@
+version: '3'
+
+tasks:
+  frontend:build:
+    desc: Build frontend assets
+    dir: frontend
+    cmds:
+      - npm run build
+
+  frontend:dev:
+    desc: Start frontend development server
+    dir: frontend
+    cmds:
+      - npm run dev
+
+  build:
+    desc: Build native desktop application
+    deps: [frontend:build]
+    cmds:
+      - go build -o bin/Messages .
+
+  run:
+    desc: Build and run native desktop application
+    deps: [frontend:build]
+    cmds:
+      - go run .
+
+  package:
+    desc: Package native desktop app bundle for current OS
+    deps: [frontend:build]
+    cmds:
+      - go build -ldflags "-s -w" -o bin/Messages .
+
+  web:run:
+    desc: Run application in web server mode (no window, accessible via browser)
+    deps: [frontend:build]
+    cmds:
+      - go run -tags server .
+
+  web:build:
+    desc: Build headless web server binary
+    deps: [frontend:build]
+    cmds:
+      - go build -tags server -o bin/messages-server .
+
+  ios:run:
+    desc: Run on iOS Simulator (macOS with full Xcode required)
+    deps: [frontend:build]
+    cmds:
+      - GOOS=ios GOARCH=arm64 go build -o bin/Messages-ios .
+
+  ios:build:
+    desc: Build iOS package bundle
+    deps: [frontend:build]
+    cmds:
+      - GOOS=ios GOARCH=arm64 go build -o bin/Messages.app .
+
+  android:run:
+    desc: Run on Android Emulator (Android SDK/NDK required)
+    deps: [frontend:build]
+    cmds:
+      - CGO_ENABLED=1 GOOS=android GOARCH=arm64 go build -buildmode=c-shared -o bin/libwails.so .
+
+  android:build:
+    desc: Build Android shared library
+    deps: [frontend:build]
+    cmds:
+      - CGO_ENABLED=1 GOOS=android GOARCH=arm64 go build -buildmode=c-shared -o bin/libwails.so .

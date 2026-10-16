@@ -1,0 +1,26 @@
+# Binaries and build artifacts
+bin/
+*.exe
+*.dll
+*.so
+*.dylib
+*.app
+
+# Go
+*.out
+*.test
+
+# Node / Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Database
+*.db
+*.db-wal
+*.db-shm
+.zap-messages/
+
+# OS metadata
+.DS_Store
+Thumbs.db

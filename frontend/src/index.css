@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light dark;
+  --imessage-blue: #007AFF;
+  --imessage-blue-dark: #0062E0;
+  --imessage-gray-light: #E9E9EB;
+  --imessage-gray-dark: #26252A;
+  --imessage-sidebar-light: rgba(246, 246, 246, 0.85);
+  --imessage-sidebar-dark: rgba(30, 30, 30, 0.85);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbars matching macOS */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(142, 142, 147, 0.3);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(142, 142, 147, 0.6);
+}
+
+/* Vibrancy background blur */
+.vibrancy-sidebar {
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}
+
+/* Speech bubble tails */
+.bubble-tail-outgoing {
+  position: relative;
+}
+.bubble-tail-outgoing::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: -6px;
+  width: 16px;
+  height: 18px;
+  background: linear-gradient(180deg, #007AFF 0%, #0062E0 100%);
+  border-bottom-left-radius: 12px 10px;
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+}
+
+.bubble-tail-incoming {
+  position: relative;
+}
+.bubble-tail-incoming::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -6px;
+  width: 16px;
+  height: 18px;
+  border-bottom-right-radius: 12px 10px;
+  clip-path: polygon(0 100%, 100% 0, 100% 100%);
+}
+.dark .bubble-tail-incoming::after {
+  background-color: #26252A;
+}
+:not(.dark) .bubble-tail-incoming::after {
+  background-color: #E9E9EB;
+}
+
+/* Typing indicator dot animation */
+@keyframes typingBounce {
+  0%, 60%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-4px);
+  }
+}
+
+.typing-dot {
+  animation: typingBounce 1.3s infinite ease-in-out;
+}
+.typing-dot:nth-child(1) { animation-delay: 0s; }
+.typing-dot:nth-child(2) { animation-delay: 0.15s; }
+.typing-dot:nth-child(3) { animation-delay: 0.3s; }
