@@ -1,0 +1,33 @@
+schema: spec-driven
+
+context: |
+  Project: zap-messages
+  Goal: Open-source, self-hosted Apple macOS Messages clone.
+  Tech Stack:
+    - Backend: Go 1.25+, Wails v3, SQLite (modernc.org/sqlite pure Go)
+    - Frontend: React 19, TypeScript, Tailwind CSS, Vite, Lucide Icons
+    - Platforms: macOS, Linux, Windows, iOS, Android, and Web
+  Design System:
+    - Apple Human Interface Guidelines (HIG)
+    - Default window size: 880x720px
+    - 2-pane split view on desktop/web; stack navigation on mobile
+    - Color tokens: iMessage blue (#007AFF -> #0062E0), incoming gray (#E9E9EB / #26252A)
+    - Fonts: SF Pro / -apple-system
+
+rules:
+  proposal:
+    - Include platform implications (Desktop vs Mobile vs Web)
+    - Document visual adherence to macOS Messages HIG
+    - Ensure self-hosted backend compatibility
+  tasks:
+    - Group tasks into clear phases (Foundation, UI, Sync/Backend, Packaging)
+    - Keep tasks independently testable
+
+operations:
+  apply:
+    guidance:
+      - Verify desktop layout as well as mobile responsive behavior
+      - Check offline-first SQLite synchronization
+  archive:
+    guidance:
+      - Summarize delta specs consolidated into main specs
